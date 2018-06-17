@@ -5,8 +5,11 @@
  */
 package proyecto1;
 
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -15,8 +18,8 @@ import java.util.logging.Logger;
 public class MovCab1Derecha extends Thread{
     protected int cantidad;
     public Tablero tablero = null;
-    public int i,j,n,m;
-    
+    public int n,m;
+    Random rm = new Random();
    
     
    public MovCab1Derecha(){
@@ -26,6 +29,9 @@ public class MovCab1Derecha extends Thread{
     public MovCab1Derecha(int cantidad, Tablero tablero){
         this.cantidad=cantidad;
         this.tablero=tablero;
+        Tablero tab = new Tablero();
+        tab.i=n;
+        tab.j=m;
     }
     
     public boolean comprobarfin(){
@@ -53,13 +59,33 @@ public class MovCab1Derecha extends Thread{
             
         }
         else{
+            
+            
+            int pos = tablero.matrizL[tablero.n+1][tablero.m];
+            if(pos==2){
+                int i=rm.nextInt(2);
+                   switch(i){
+                       case 0: MovCab1Arriba moviarriba = new MovCab1Arriba(cantidad,tablero); moviarriba.start();
+                           break;
+                       case 1: MovCab1Abajo moviabajo = new MovCab1Abajo(cantidad,tablero); moviabajo.start();
+                           break;
+                   }
+                }
+                else{
+            if(tablero.matrizL[tablero.n+1][tablero.m]==7){
+                tablero.matrizL[tablero.n+1][tablero.m]=0;
+                tablero.matrizG[tablero.n+1][tablero.m].setIcon(null);
+               
+                JOptionPane.showMessageDialog(null, "Hola");
+            }
+            
             try {
-                //mover una posicion
                 tablero.matrizL[tablero.n][tablero.m]=0;
                 tablero.matrizG[tablero.n][tablero.m].setIcon(null);
                 tablero.repintar();
                 tablero.n+=1;
-                tablero.matrizL[tablero.n][tablero.m]+=1;
+                tablero.matrizG[tablero.n][tablero.m].setIcon(null);
+                tablero.matrizL[tablero.n][tablero.m]=1;
                 tablero.repintar();
                 cantidad--;
                 Thread.sleep(500);
@@ -70,6 +96,8 @@ public class MovCab1Derecha extends Thread{
                 Logger.getLogger(MovCab1Derecha.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        }
+        
     }
     
     public void run(){

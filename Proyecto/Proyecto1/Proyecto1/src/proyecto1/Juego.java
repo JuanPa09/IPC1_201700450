@@ -8,7 +8,11 @@ package proyecto1;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+
 
 /**
  *
@@ -16,7 +20,20 @@ import javax.swing.ImageIcon;
  */
 public class Juego extends javax.swing.JFrame {
     
-   public int dado;
+    Cronometro cronometro = new Cronometro();
+    
+    
+   public int dado,r;   
+   public Tablero tab;
+    public boolean tabcreado = false;
+    Random rm = new Random();
+    public int turno=1,tc1,tc2,tm1,tm2,tp1,tp2;
+    public boolean c1=false,c2=false,m1=false,m2=false,p1=false,p2=false;
+    
+    
+    Config config = new Config();
+    int tamnio=Integer.valueOf(config.getTamconfig());
+   
     
     //IMAGEN FONDO 
     public class Imagen extends javax.swing.JPanel {
@@ -50,6 +67,37 @@ super.paintComponent(grafico);
      */
     public Juego() {
         initComponents();
+        cronometro.start();
+       Timer timer = new Timer();
+       TimerTask tarea = new TimerTask() {
+            @Override
+            public void run() {
+                
+                jLabel6.setText(String.valueOf(cronometro.minutos));
+                int min=cronometro.minutos;
+                switch(min) {
+   case 0 : jLabel7.setText("0"+String.valueOf(cronometro.segundos));
+      break;
+   case 1 : jLabel7.setText("0"+String.valueOf(cronometro.segundos));
+      break; // optional
+   case 2 : jLabel7.setText("0"+String.valueOf(cronometro.segundos));
+       break;
+   case 3 : jLabel7.setText("0"+String.valueOf(cronometro.segundos));
+       break;
+   case 5 : jLabel7.setText("0"+String.valueOf(cronometro.segundos));
+       break;
+   case 6 : jLabel7.setText("0"+String.valueOf(cronometro.segundos));  
+   default : 
+}
+                if (cronometro.minutos==config.getTiempo()){
+                    timer.cancel();
+                    JOptionPane.showMessageDialog(null, "Termino el juego");
+                }
+            }
+        };
+        timer.schedule(tarea, 0, 1000);
+        
+        
         Config config = new Config();
         Imagen Imagen = new Imagen();
         jPanel2.add(Imagen);
@@ -60,10 +108,28 @@ super.paintComponent(grafico);
         tab = new Tablero(tamnio,jPanel4);
         tabcreado= true;
         jLabel2.setText(config.getNombre1());
+        jLabel4.setText(config.getNombre2());
+        
+        
+        tc1=config.getTc1();
+        tc2=config.getTc2();
+        tm1=config.getTm1();
+        tm2=config.getTm2();
+        tp1=config.getTp1();
+        tp2=config.getTp2();
+        
+        if (tc1==0){
+            c1=true;
+        }else{
+            if(tc1==0){
+                m1=true;
+            }else{
+                p1=true;
+            }
+        }
         
     }
-    public Tablero tab;
-    public boolean tabcreado = false;
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -84,7 +150,14 @@ super.paintComponent(grafico);
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
+        jButton6 = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
+        jButton8 = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("JUEGO\n");
@@ -173,6 +246,30 @@ super.paintComponent(grafico);
 
         jLabel3.setText("0");
 
+        jButton6.setText("jButton6");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
+        jButton7.setText("jButton7");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+
+        jButton8.setText("jButton8");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("Jugador 2");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -196,20 +293,38 @@ super.paintComponent(grafico);
                                 .addComponent(jLabel3))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(65, 65, 65)
-                                .addComponent(jButton2)))
+                                .addComponent(jButton2))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(65, 65, 65)
+                                .addComponent(jButton1))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jButton6))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jButton7)
+                                    .addComponent(jButton8)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(63, 63, 63)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 20, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(65, 65, 65)
-                .addComponent(jButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 421, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 167, Short.MAX_VALUE)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(80, 80, 80)
+                .addComponent(jButton8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton7)
+                .addGap(18, 18, 18)
+                .addComponent(jButton6)
+                .addGap(51, 51, 51)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton5, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING))
@@ -229,26 +344,49 @@ super.paintComponent(grafico);
         jLabel1.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
         jLabel1.setText("MEDIEVIL");
 
+        jLabel5.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
+        jLabel5.setText(":");
+
+        jLabel6.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
+        jLabel6.setText("00");
+
+        jLabel7.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
+        jLabel7.setText("00");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(522, 522, 522)
-                .addComponent(jLabel1)
-                .addContainerGap(564, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(72, 72, 72)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 845, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(72, 72, 72)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 845, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(522, 522, 522)
+                        .addComponent(jLabel1)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(45, 45, 45)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel7))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(42, 42, 42))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel5)
+                        .addComponent(jLabel6)
+                        .addComponent(jLabel7)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -261,23 +399,22 @@ super.paintComponent(grafico);
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        MovCab1Abajo movi = new MovCab1Abajo (dado,tab);
-        movi.start();
-        
-        
+       if (c1==true){
+        MovCab1Abajo moviabajo = new MovCab1Abajo(dado,tab);
+        moviabajo.start();    
+       }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        
-        MovCab1Arriba movi = new MovCab1Arriba (dado,tab);
-        movi.start();
-   
-        
+     if (c1==true){
+     MovCab1Arriba moviarriba = new MovCab1Arriba (dado,tab); 
+     moviarriba.start();
+     }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-        Random rm = new Random();
+        
         do{
         dado=rm.nextInt(7);
         }
@@ -286,15 +423,37 @@ super.paintComponent(grafico);
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        MovCab1Derecha movi = new MovCab1Derecha(dado,tab);
-        movi.start();
-        
+       if (c1==true){
+        MovCab1Derecha moviderecha = new MovCab1Derecha(dado,tab);
+        moviderecha.start();
+       }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        MovCab1Izquierda movi = new MovCab1Izquierda(dado,tab);
-        movi.start();
+        if(c1==true){
+        MovCab1Izquierda moviizquierda = new MovCab1Izquierda(dado,tab);
+        moviizquierda.start();
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+       JOptionPane.showMessageDialog(null, config.getTp1());
+        
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+       
+        JOptionPane.showMessageDialog(null, config.getTm1());
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, config.getTc1());
+        if (c1==true){
+            JOptionPane.showMessageDialog(null, "Es tru");
+        }
+    }//GEN-LAST:event_jButton8ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -338,9 +497,16 @@ super.paintComponent(grafico);
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;

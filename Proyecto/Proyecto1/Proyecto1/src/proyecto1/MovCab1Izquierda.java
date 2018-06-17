@@ -5,6 +5,7 @@
  */
 package proyecto1;
 
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -17,7 +18,7 @@ public class MovCab1Izquierda extends Thread {
     protected int cantidad;
     public Tablero tablero = null;
     public int i,j,n,m;
-    
+    Random rm = new Random();
    
     
    public MovCab1Izquierda(){
@@ -54,6 +55,20 @@ public class MovCab1Izquierda extends Thread {
             
         }
         else{
+            
+            int pos = tablero.matrizL[tablero.n-1][tablero.m];
+            if(pos==2){
+                int i=rm.nextInt(2);
+                   switch(i){
+                       case 0: MovCab1Arriba moviarriba = new MovCab1Arriba(cantidad,tablero); moviarriba.start();
+                           break;
+                       case 1: MovCab1Abajo moviabajo = new MovCab1Abajo(cantidad,tablero); moviabajo.start();
+                           break;
+                   }
+                }
+                else{
+            
+            
             try {
                 //mover una posicion
                 tablero.matrizL[tablero.n][tablero.m]=0;
@@ -70,6 +85,7 @@ public class MovCab1Izquierda extends Thread {
             } catch (InterruptedException ex) {
                 Logger.getLogger(MovCab1Izquierda.class.getName()).log(Level.SEVERE, null, ex);
             }
+        }
         }
     }
     

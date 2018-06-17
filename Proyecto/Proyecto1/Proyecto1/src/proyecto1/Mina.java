@@ -12,18 +12,15 @@ import javax.swing.ImageIcon;
  *
  * @author Juan Pablo
  */
-public class Cab1 {
-    
-   
+public class Mina {
     
     public ImageIcon obtenerImagen(int tamx, int tamy){
-        ImageIcon per = new ImageIcon(getClass().getResource("/imagen/caballero1.png"));
+        ImageIcon per = new ImageIcon(getClass().getResource("/imagen/mina.png"));
         Image imagen = per.getImage();
         Image tamImagen= imagen.getScaledInstance(tamx, tamy, Image.SCALE_SMOOTH);
         
         per = new ImageIcon(tamImagen);
         return per;
     }
-    
     
 }

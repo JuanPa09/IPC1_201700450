@@ -23,17 +23,18 @@ public class Tablero {
    public int [][] matrizL;
    public JPanel panel;
    public JLabel texto;
-   public int tam=0;
+   public int tam;
    public Cab1 personaje1;
    public Cab2 personaje2;
    public Pri1 personaje3;
    public Pri2 personaje4;
    public Mag1 personaje5;
    public Mag2 personaje6;
+   public Mina mina;
    public int tambloquey;
    public int tambloquex;  
-   public int i,m;
-   public int j,n;
+   public int a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p;
+   public int minA,vida;
    
    Random rm = new Random();
    
@@ -41,6 +42,7 @@ public class Tablero {
     public Tablero(int tam, JPanel panel){
         this.tam=tam;
         this.fondo=panel;
+        
         llenar();        
     }
     
@@ -55,6 +57,8 @@ public class Tablero {
         matrizG = new JLabel [tam][tam];
         Random rm = new Random();
         
+        minA=(int) (0.10*tam*tam);
+        vida=(int) (0.5*tam);
         // 1 personaje, 0 vacio
         
         for (int i =0;i<tam;i++){
@@ -63,39 +67,57 @@ public class Tablero {
             }
             
         }
+        //Caballero 1
+       do{
+        n=rm.nextInt(tam);
+        m=rm.nextInt(tam);
+        while(matrizL[n][m]!=0){
+          n=rm.nextInt(tam);
+        m=rm.nextInt(tam);  
+        }
+        matrizL[n][m]=1;}
+       while(matrizL[n][m]==0);
         
-       /*for(int n=0;n<6;n++){
-           i=rm.nextInt(tam);
-           j=rm.nextInt(tam);
-           matrizL[i][j]=1+n;
-       }*/
+        do{
+        a=rm.nextInt(tam);
+        b=rm.nextInt(tam);
+        while(matrizL[a][b]!=0){
+          a=rm.nextInt(tam);
+        b=rm.nextInt(tam);  
+        }
+        matrizL[a][b]=2;}
+       while(matrizL[a][b]==0);
+        
+        for(i=0;i<minA;i++){
+        do{
+        k=rm.nextInt(tam);
+        l=rm.nextInt(tam);
+        while(matrizL[k][l]!=0){
+          k=rm.nextInt(tam);
+        l=rm.nextInt(tam);  
+        }
+        matrizL[k][l]=7;}
+       while(matrizL[n][m]==0);
+    }
+           
        
-       
-       n=rm.nextInt(tam);
-       m=rm.nextInt(tam);
-       matrizL[n][m]=1 ;
-       
-       
+      
+         
         personaje1 = new Cab1();
         personaje2 = new Cab2();
         personaje3 = new Pri1();
         personaje4 = new Pri2();
         personaje5 = new Mag1();
         personaje6 = new Mag2();
-          
-        personaje1.posper = 0;
-        //personaje2.posper = 0;
-        //personaje3.posper = 0;
-        //personaje4.posper = 0;
-        //personaje5.posper = 0;
-        //personaje6.posper = 0;
+        mina =       new Mina(); 
+        
         
         
         
         repintar();       
         
         
-    }
+       }
     
     public void repintar (){
         JLabel casilla=null;
@@ -106,13 +128,27 @@ public class Tablero {
                     
                 }//1
                 else{
-                    if (matrizL[i][j]==1){
-                    casilla=new JLabel(this.personaje1.obtenerImagen(tambloquex,tambloquey));
+                    switch(matrizL[i][j]) {
+  
+                        
+    case 1 :
+      casilla=new JLabel(this.personaje1.obtenerImagen(tambloquex,tambloquey));
+      break; // optional
+   
+   case 2 :
+      casilla=new JLabel(this.personaje2.obtenerImagen(tambloquex,tambloquey));
+      break; // optional
+      
+   case 7 : casilla=new JLabel(this.mina.obtenerImagen(tambloquex/2,tambloquey/2));
+   
+   // You can have any number of case statements.
+   default : // Optional
+      
+}
                     
-                    }
                 }
                 casilla.setOpaque(false);
-                casilla.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+                casilla.setBorder(BorderFactory.createLineBorder(Color.BLUE));
                 casilla.setBounds(i*tambloquex,j*tambloquey,tambloquex,tambloquey);
                matrizG [i][j]=casilla;                
                 fondo.add(matrizG[i][j],BorderLayout.CENTER);
