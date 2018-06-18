@@ -62,7 +62,20 @@ public class Config {
     }
 
     public static void setTc1(int tc1) {
-        Config.tc1 = tc1;
+        if(tc1==1){
+        Config.tc1 = tc1;    
+        }else{
+            if(tc1==2){
+                Config.tc1 = 3;
+            }else{
+                if(tc1==3){
+                    Config.tc1=5;
+                }
+            }
+        }
+        
+        
+        
     }
 
     public static int getTc2() {
@@ -70,7 +83,17 @@ public class Config {
     }
 
     public static void setTc2(int tc2) {
-        Config.tc2 = tc2;
+        if(tc2==1){
+        Config.tc2 = 2;    
+        }else{
+            if(tc2==2){
+                Config.tc2 = 4;
+            }else{
+                if(tc2==3){
+                    Config.tc2=6;
+                }
+            }
+        }
     }
 
     public static int getTp1() {
@@ -78,7 +101,17 @@ public class Config {
     }
 
     public static void setTp1(int tp1) {
-        Config.tp1 = tp1;
+        if(tp1==1){
+        Config.tp1 = tp1;    
+        }else{
+            if(tp1==2){
+                Config.tp1 = 3;
+            }else{
+                if(tp1==3){
+                    Config.tp1=5;
+                }
+            }
+        }
     }
 
     public static int getTp2() {
@@ -86,7 +119,17 @@ public class Config {
     }
 
     public static void setTp2(int tp2) {
-        Config.tp2 = tp2;
+        if(tp2==1){
+        Config.tp2 = 2;    
+        }else{
+            if(tp2==2){
+                Config.tp2 = 4;
+            }else{
+                if(tp2==3){
+                    Config.tp2=6;
+                }
+            }
+        }
     }
 
     public static int getTm1() {
@@ -94,7 +137,17 @@ public class Config {
     }
 
     public static void setTm1(int tm1) {
-        Config.tm1 = tm1;
+        if(tm1==1){
+        Config.tm1 = tm1;    
+        }else{
+            if(tm1==2){
+                Config.tm1 = 3;
+            }else{
+                if(tm1==3){
+                    Config.tm1=5;
+                }
+            }
+        }
     }
 
     public static int getTm2() {
@@ -102,10 +155,41 @@ public class Config {
     }
 
     public static void setTm2(int tm2) {
-        Config.tm2 = tm2;
+        if(tm2==1){
+        Config.tm2 = 2;    
+        }else{
+            if(tm2==2){
+                Config.tm2 = 4;
+            }else{
+                if(tm2==3){
+                    Config.tm2=6;
+                }
+            }
+        }
     }
     
-    
+   public static int vida1=5;
+   public static int vida2=5;
+
+    public static int getVida1() {
+        return vida1;
+    }
+
+    public static void setVida1(int vida1) {
+        Config.vida1 = vida1;
+    }
+
+    public static int getVida2() {
+        return vida2;
+    }
+
+    public static void setVida2(int vida2) {
+        Config.vida2 = vida2;
+    }
+   
+   
+   
+   
     
     
     

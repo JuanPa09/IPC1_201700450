@@ -19,7 +19,7 @@ public class Cab1 {
     public ImageIcon obtenerImagen(int tamx, int tamy){
         ImageIcon per = new ImageIcon(getClass().getResource("/imagen/caballero1.png"));
         Image imagen = per.getImage();
-        Image tamImagen= imagen.getScaledInstance(tamx, tamy, Image.SCALE_SMOOTH);
+        Image tamImagen= imagen.getScaledInstance(tamx, tamy, Image.SCALE_AREA_AVERAGING);
         
         per = new ImageIcon(tamImagen);
         return per;
