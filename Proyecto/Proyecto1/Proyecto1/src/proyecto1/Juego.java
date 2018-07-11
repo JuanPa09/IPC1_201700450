@@ -16,8 +16,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-
-
 /**
  *
  * @author Juan Pablo
@@ -107,18 +105,23 @@ super.paintComponent(grafico);
                     timer.cancel();
                     if(config.getVida1()<=0){
                         JOptionPane.showMessageDialog(null,"GANO EL JUGADOR 2");
+                        
                     }
                     if(config.getVida2()<=0){
                     JOptionPane.showMessageDialog(null,"GANO EL JUGADOR 1");
+                    
                         }
                     if(config.getVida1()>config.getVida2()){
                         JOptionPane.showMessageDialog(null,"GANO EL JUGADOR 1");
+                        
                     }
                     if(config.getVida2()>config.getVida1()){
                         JOptionPane.showMessageDialog(null,"GANO EL JUGADOR 2");
+                        
                     }
                     if(config.getVida1()==config.getVida2()){
                         JOptionPane.showMessageDialog(null,"!EMPATE");
+                        
                     }
                     
                 }
@@ -833,6 +836,8 @@ super.paintComponent(grafico);
         cronometro.task.cancel();
         this.dispose();
         Configuracion configu = new Configuracion();
+        config.setVida1(5);
+        config.setVida2(5);
         configu.show();
     }//GEN-LAST:event_jButton11ActionPerformed
 

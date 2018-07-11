@@ -17,7 +17,7 @@ public class APrincesa {
         public void ataqueAbajo1(Tablero tab,Config config){
             this.config=config;
             this.tab=tab;
-            int a =tab.matrizL[tab.h][tab.g+1];
+            int a =tab.matrizL[tab.g][tab.h+1];
             
                 if (a==2||a==4||a==6){
                 config.setVida2(config.getVida2()-1);
@@ -29,7 +29,7 @@ public class APrincesa {
         public void ataqueArriba1(Tablero tab,Config config){
             this.config=config;
             this.tab=tab;
-            int a =tab.matrizL[tab.h][tab.g-1];
+            int a =tab.matrizL[tab.g][tab.h-1];
             
                 if (a==2||a==4||a==6){
                 config.setVida2(config.getVida2()-1);
@@ -41,7 +41,7 @@ public class APrincesa {
         public void ataqueDerecha1(Tablero tab,Config config){
             this.config=config;
             this.tab=tab;
-            int a =tab.matrizL[tab.h+1][tab.g];
+            int a =tab.matrizL[tab.g+1][tab.h];
             
                 if (a==2||a==4||a==6){
                 config.setVida2(config.getVida2()-1);
@@ -53,7 +53,7 @@ public class APrincesa {
         public void ataqueIzquierda1(Tablero tab,Config config){
             this.config=config;
             this.tab=tab;
-            int a =tab.matrizL[tab.h-1][tab.g];
+            int a =tab.matrizL[tab.g-1][tab.h];
             
                 if (a==2||a==4||a==6){
                 config.setVida2(config.getVida2()-1);

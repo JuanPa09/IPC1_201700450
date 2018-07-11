@@ -19,6 +19,7 @@ public class Pri1 {
         Image imagen = per.getImage();
         Image tamImagen= imagen.getScaledInstance(tamx, tamy, Image.SCALE_AREA_AVERAGING);
         
+        
         per = new ImageIcon(tamImagen);
         return per;
     }

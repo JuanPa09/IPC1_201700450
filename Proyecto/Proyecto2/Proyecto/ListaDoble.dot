@@ -1,0 +1,20 @@
+digraph lista{
+nodo1853716468[label="Pasajero: 1"];
+nodo1853716468->nodo1881499275;
+nodo1881499275[label="Pasajero: 2"];
+nodo1881499275->nodo369188098;
+nodo369188098[label="Pasajero: 3"];
+nodo369188098->nodo131803396;
+nodo131803396[label="Pasajero: 4"];
+nodo131803396->nodo43789532;
+nodo43789532[label="Pasajero: 5"];
+nodo43789532->nodo1498809146;
+nodo1498809146[label="Pasajero: 6"];
+nodo1498809146->nodo1159969887;
+nodo1159969887[label="Pasajero: 7"];
+nodo1159969887->nodo468594422;
+nodo468594422[label="Pasajero: 8"];
+nodo468594422->nodo2029460379;
+nodo2029460379[label="Pasajero: 9"];
+
+}
